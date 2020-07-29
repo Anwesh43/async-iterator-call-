@@ -13,8 +13,9 @@ async function* asyncCounter(n) {
     }
 }
 
-const asyncIterator = async (n) => {
+const asyncIterator = async (n, cb, stopcb) => {
     for await(let i of asyncCounter(n)) {
-        console.log(i)
+        cb(i)
     }
+    stopcb()
 }
