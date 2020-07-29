@@ -1,5 +1,11 @@
 const scGap = 0.02
+var w = window.innerWidth
+var h = window.innerHeight
 
+window.onresize = () => {
+    w = window.innerWidth
+    h = window.innerHeight
+}
 class Block {
 
     dir = 1
@@ -20,22 +26,26 @@ class Block {
 
     updateX() {
         this.scale += scGap * this.dir
-        this.div.style.left = (window.innerWidth - 100) * this.scale
+        console.log(this.scale)
+        this.div.style.left = `${(window.innerWidth - 100) * this.scale}px`
     }
 
     start() {
         if (!this.updating) {
             this.updating = true
-            asyncCounter(1 / scGap, () => {
+            console.log("started updating")
+            asyncIterator(20, 1 / scGap, () => {
+                console.log("hello")
                 this.updateX()
             }, () => {
-                this.updating = true
+                this.updating = false
+                this.dir *= -1
             })
         }
     }
 
     handleTap() {
-        this.div.onmousedown = () => {
+        this.div.onclick = () => {
             this.start()
         }
     }

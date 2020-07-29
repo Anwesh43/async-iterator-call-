@@ -6,15 +6,15 @@ const delayPromise = (delay) => {
     })
 }
 
-async function* asyncCounter(n) {
+async function* asyncCounter(delay, n) {
     for (let i = 1; i <= n; i++) {
-        await delayPromise(1000)
+        await delayPromise(delay)
         yield i
     }
 }
 
-const asyncIterator = async (n, cb, stopcb) => {
-    for await(let i of asyncCounter(n)) {
+const asyncIterator = async (delay, n, cb, stopcb) => {
+    for await(let i of asyncCounter(delay, n)) {
         cb(i)
     }
     stopcb()
