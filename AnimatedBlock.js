@@ -6,13 +6,14 @@ class Block {
     scale = 0
     updating = false
 
-    init(i) {
+    init(i, n) {
+        const gap = h / n
         this.div = document.createElement('div')
         this.div.style.position = 'absolute'
-        this.div.style.top = '0px'
+        this.div.style.top = `${gap * i}px`
         this.div.style.left = '0px'
         this.div.style.width = '100px'
-        this.div.style.height = '100px'
+        this.div.style.height = `${gap}px`
         this.div.style.background = 'indigo'
         document.body.appendChild(this.div)
     }
@@ -39,9 +40,9 @@ class Block {
         }
     }
 
-    static create(i) {
+    static create(i, n) {
         const block = new Block()
-        block.init(i)
+        block.init(i, n)
         block.handleTap()
     }
 }
